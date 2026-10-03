@@ -7,4 +7,5 @@ A social campus platform where Cal Poly Pomona students anonymously share hot ta
 - Trung Tran
 - Tiffany Dinh
 - Eulalia Pedro Andres
+- Danica Jacutin
 
