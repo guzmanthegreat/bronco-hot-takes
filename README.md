@@ -5,6 +5,6 @@ A social campus platform where Cal Poly Pomona students anonymously share hot ta
 - Josh Guzman
 - Miranda Rendon
 - Trung Tran
-- 
+- Tiffany Dinh
 - Eulalia Pedro Andres
 
