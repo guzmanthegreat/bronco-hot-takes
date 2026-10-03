@@ -4,3 +4,4 @@ A social campus platform where Cal Poly Pomona students anonymously share hot ta
 # Contributors
 - Josh Guzman
 - Miranda Rendon
+- Trung Tran
