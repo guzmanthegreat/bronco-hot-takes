@@ -1,0 +1,11 @@
+rules_version = '2';
+
+// Security rules for posts, votes, and replies.
+// TODO: replace this deny-all default with real rules.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
