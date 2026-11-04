@@ -35,7 +35,7 @@ export default function NewPost() {
 
   return (
       <div className="new-post">
-        <h1>CREATE POST</h1>
+        <h1 id="create-post-header">CREATE POST</h1>
 
         <div className="input-container">
           <label for="post-title">Post Title</label>
