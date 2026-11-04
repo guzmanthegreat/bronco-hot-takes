@@ -1,10 +1,47 @@
 h1 {
     text-align: center;
     margin-top: 5%;
+    margin-bottom: 4%;
+    font-size: 30px;
+    font-family: Verdana;
 }
 
-.text-input {
+.input-container {
     display: flex;
     flex-direction: column;
     margin: 0 20% 2% 20%;
+    font-family: Verdana;
+}
+
+label{
+    font-size: 20px;
+    font-family: Verdana;
+    margin-bottom: 5px;
+}
+
+textarea {
+    font-size: 15px;
+    font-family: Verdana;
+    height: 250px;
+    width: auto;
+}
+
+input {
+    font-size: 15px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    font-size: 18px;
+    font-family: Verdana;
+    padding: 6px;
+    margin-top: 10px;
+}
+
+button:hover {
+    cursor: pointer;
 }
