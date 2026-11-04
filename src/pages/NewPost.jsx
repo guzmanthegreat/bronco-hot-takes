@@ -33,7 +33,9 @@ export default function NewPost() {
         <textarea id="post-description" name="post-description" maxlength="250" placeholder="Enter post description"></textarea>
 
         <div className="char-count-container">
-          <span id="character-count">0</span>/250 characters
+          <p>
+            <span id="character-count">0</span>/250 characters
+          </p>
         </div>
 
       </div> 
@@ -44,7 +46,7 @@ export default function NewPost() {
       </div>
 
       <div className="button-container">
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </div>
 
     </div>
