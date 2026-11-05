@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'Capriola';
+    src: url('../fonts/Capriola-Regular.ttf');
+    font-weight: normal;
+}
+
+.new-post {
+    border-radius: 10px;
+    padding: 3%;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    margin-left: 20%;
+    margin-right: 20%;
+    background-color: #e0e4ed;
+    border: 18px solid #9aabc5;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.33);
+}
+
+#create-post-header {
+    text-align: center;
+    margin-bottom: 4%;
+    font-size: 28px;
+    font-family: Capriola;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 8% 2% 8%;
+    font-family: Capriola;
+}
+
+label{
+    font-size: 20px;
+    font-family: Capriola;
+    margin-bottom: 5px;
+}
+
+textarea {
+    font-size: 15px;
+    font-family: Capriola;
+    height: 160px;
+    padding: 5px;
+    width: auto;
+}
+
+input {
+    font-size: 15px;
+    padding: 5px;
+    font-family: Capriola;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    font-size: 18px;
+    font-family: Capriola;
+    padding: 6px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+p {
+    color: gray;
+}
