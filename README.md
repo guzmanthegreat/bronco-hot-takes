@@ -6,9 +6,8 @@ A social campus platform where Cal Poly Pomona students anonymously share hot ta
 - Miranda Rendon
 - Trung Tran
 - Tiffany Dinh
-- Eulalia Pedro Andres
 - Danica Jacutin
-
+- Eulalia Pedro Andres
 
 # Running Locally
 Requires Node 20.19+ (Node 22 recommended).
