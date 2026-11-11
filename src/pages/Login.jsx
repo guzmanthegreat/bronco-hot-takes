@@ -24,7 +24,7 @@ export default function Login() {
     }
     
     if (password.trim() === "") {
-      passwordError.textContent = "Password is required";
+      passwordError.textContent = "Password is required.";
     }
 
     // if both fields are empty stop the function
