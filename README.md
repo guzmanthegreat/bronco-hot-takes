@@ -1,6 +1,17 @@
 # bronco-hot-takes
 A social campus platform where Cal Poly Pomona students anonymously share hot takes, vote, and discuss opinions about campus life.
 
+## Table of Contents
+
+- [Contributors](#contributors)
+- [Running Locally](#running-locally)
+- [Team Development Workflow](#team-development-workflow)
+  - [Before You Start](#before-you-start)
+  - [While You Work](#while-you-work)
+  - [Before Opening a Pull Request](#before-opening-a-pull-request)
+  - [Review and Completion](#review-and-completion)
+  - [What Depends on What](#what-depends-on-what)
+- [Task → File Map](#task--file-map)
 
 # Contributors
 - Josh Guzman
@@ -10,10 +21,8 @@ A social campus platform where Cal Poly Pomona students anonymously share hot ta
 - Danica Jacutin
 - Eulalia Pedro Andres
 
-
 # Running Locally
 Requires Node 20.19+ (Node 22 recommended).
-
 
 ```sh
 npm install
@@ -21,9 +30,7 @@ cp .env.example .env   # only needed once Firebase is wired up
 npm run dev            # opens at http://localhost:5173
 ```
 
-
 Every page is a placeholder for now, so you can click through the routes before the real pages are built:
-
 
 | Route | Page |
 |---|---|
@@ -33,7 +40,6 @@ Every page is a placeholder for now, so you can click through the routes before 
 | `/post/:id` | Post detail |
 | `/profile/:userId` | Profile |
 | anything else | 404 |
-
 
 # Team Development Workflow
 
@@ -79,10 +85,8 @@ We use GitHub Projects to track tasks and GitHub pull requests to review code. I
 - The Firestore post service must be ready before the feed can display real posts.
 - The first complete flow is: **Sign up → log in → create a post → save it → refresh → see it in the feed**.
 
-
 # Task → File Map
 Which files each task touches. All routes are already set up in `src/App.jsx`, so you shouldn't need to edit it.
-
 
 | Task | Files to touch |
 |---|---|
