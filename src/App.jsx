@@ -8,6 +8,7 @@ import NewPost from "./pages/NewPost";
 import PostDetail from "./pages/PostDetail";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import "./firebase/config";
 
 export default function App() {
   return (
