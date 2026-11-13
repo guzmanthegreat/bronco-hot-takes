@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Layout from "./components/Layout";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -12,7 +12,7 @@ import NotFound from "./pages/NotFound";
 export default function App() {
   return (
     <ErrorBoundary>
-      <Navbar />
+      <Layout />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
