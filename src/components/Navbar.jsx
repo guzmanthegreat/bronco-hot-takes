@@ -1,11 +1,29 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import "../styles/Navbar.css"
 
-// Placeholder so the app runs. Replace with the real navbar + user menu.
-export default function Navbar() {
+export default function Navbar({ loggedIn }) {
   return (
-    <nav>
-      <Link to="/">Bronco Hot Takes</Link> | <Link to="/new">New post</Link> |{" "}
-      <Link to="/login">Login</Link> | <Link to="/signup">Signup</Link>
+    <nav className="navbar">
+      <Link to="/" className="website-title">Bronco Hot Takes</Link>
+      <ul>
+        {/* If user is logged in */}
+        {loggedIn && (
+          <>
+            <li><NavLink to="/new">New Post</NavLink></li>
+            {/* Pass logout function through button */}
+            <li><button className="logout-button">Logout</button></li> 
+          </>
+        )}
+
+        {/* If user is logged out */}
+        {!loggedIn && (
+          <>
+            <li><NavLink to="/login">Login</NavLink></li>
+            <li><NavLink to="/signup">Signup</NavLink></li>
+          </>
+        )}
+      </ul>
+      
     </nav>
   );
 }
