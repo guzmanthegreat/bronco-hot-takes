@@ -12,16 +12,17 @@ import NotFound from "./pages/NotFound";
 export default function App() {
   return (
     <ErrorBoundary>
-      <Layout />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/new" element={<NewPost />} />
-        <Route path="/post/:id" element={<PostDetail />} />
-        <Route path="/profile/:userId" element={<Profile />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/new" element={<NewPost />} />
+          <Route path="/post/:id" element={<PostDetail />} />
+          <Route path="/profile/:userId" element={<Profile />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Layout>
     </ErrorBoundary>
   );
 }

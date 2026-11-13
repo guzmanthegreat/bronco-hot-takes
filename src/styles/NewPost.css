@@ -30,13 +30,13 @@
     font-family: Capriola;
 }
 
-label{
+.new-post label {
     font-size: 20px;
     font-family: Capriola;
     margin-bottom: 5px;
 }
 
-textarea {
+.new-post textarea {
     font-size: 15px;
     font-family: Capriola;
     height: 160px;
@@ -44,7 +44,7 @@ textarea {
     width: auto;
 }
 
-input {
+.new-post input {
     font-size: 15px;
     padding: 5px;
     font-family: Capriola;
@@ -55,7 +55,7 @@ input {
     justify-content: center;
 }
 
-button {
+.new-post button {
     font-size: 18px;
     font-family: Capriola;
     padding: 6px;
@@ -63,10 +63,10 @@ button {
     border-radius: 5px;
 }
 
-button:hover {
+.new-post button:hover {
     cursor: pointer;
 }
 
-p {
+.new-post p {
     color: gray;
 }
