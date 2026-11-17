@@ -1,12 +1,14 @@
 import React from 'react'
 import "../styles/Login.css"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { signIn } from "../services/authService.js";
 
 export default function Login() {
 
+  const navigate = useNavigate();
 
   // javascript
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     const email = document.getElementById("user-email").value;
@@ -32,8 +34,21 @@ export default function Login() {
       return;
     }
 
+    // Connect to firebase
+    try {
+      const user = await signIn(email, password);
+      console.log("Successfully logged in: ", user.email);
 
-  };
+      // Redirect user after login
+      navigate("/");
+      
+    } catch (error) {
+
+      // Display firebase error
+      passwordError.textContent = error.message;
+    }
+
+  }
 
   return(
     <div className="login-page">
