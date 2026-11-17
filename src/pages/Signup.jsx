@@ -1,14 +1,14 @@
 import "../styles/Signup.css"
 import React from 'react'
 import { Link } from "react-router-dom"
-
-
+import { signUp } from "../services/authService.js";
 
 
 export default function Signup() {
- function handleSubmit(event) {
+
+ async function handleSubmit(event) {
      event.preventDefault();
-      const email = document.getElementById("user-email").value;
+     const email = document.getElementById("user-email").value;
      const password = document.getElementById("user-password").value;
      const emailError = document.getElementById("email-error");
      const passwordError = document.getElementById("password-error");
@@ -26,6 +26,15 @@ export default function Signup() {
       // if both fields are empty stop the function
      if (email.trim() === "" || password.trim() === "") {
        return;
+     }
+
+     // Connect to firebase
+
+     try {
+      await signUp(email.trim(), password);
+      alert("Account successfully created!");
+     } catch (error) {
+      passwordError.textContent = error.message;
      }
  
    };
