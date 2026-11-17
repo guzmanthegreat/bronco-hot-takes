@@ -2,7 +2,7 @@ import "../styles/Signup.css"
 import React from 'react'
 import { useState } from 'react'
 import { Link } from "react-router-dom"
-import { signUp } from "../services/authService.js";
+import { signUp, isCppEmail } from "../services/authService.js";
 import { useNavigate } from "react-router-dom";
 
 
@@ -35,6 +35,12 @@ export default function Signup() {
        return;
      }
 
+    // only Cal Poly Pomona emails are allowed
+     if (!isCppEmail(email)) {
+      setEmailError("You must use a @cpp.edu email.");
+      return;
+     }
+
     // if password is less than 6 characters
      if (password.trim().length < 6 && password.trim() !== "") {
       setPasswordError("Password must be at least 6 characters.");
@@ -47,13 +53,13 @@ export default function Signup() {
 
       const user = await signUp(email.trim(), password);
       console.log("Account created: ", user.email);
-      alert("Account successfully created!");
-      navigate("/");
+      alert(`Account created! We sent a verification link to ${user.email}. Verify your email, then log in.`);
+      navigate("/login");
 
      } catch (error) {
 
       // Display firebase authentication
-      if (error.code == "auth/email-already-in-use" || error.code == "auth/invalid-email") {
+      if (error.code === "auth/email-already-in-use" || error.code === "auth/invalid-email" || error.code === "auth/not-cpp-email") {
         setEmailError(error.message);
       }
       else {
