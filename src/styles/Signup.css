@@ -1,0 +1,64 @@
+@font-face {
+   font-family: 'Capriola';
+   src: url('../fonts/Capriola-Regular.ttf');
+   font-weight: normal;
+}
+
+
+.login-title {
+   text-align: center;
+   font-family: Capriola;
+   font-size: 28px;
+   margin-bottom: 10%;
+}
+
+
+.sign-up-link {
+   margin-top: 5%;
+   text-align: center;
+}
+
+
+.error-message {
+   color: red;
+}
+
+
+.signup-title {
+   text-align: center;
+   font-family: Capriola;
+   margin-top: 4%;
+   margin-bottom: 10%;
+   font-size: 28px;
+}
+
+
+.signup-page {
+   border-radius: 10px;
+   padding: 3%;
+   margin-top: 4%;
+   margin-bottom: 4%;
+   margin-left: 20%;
+   margin-right: 20%;
+   background-color: #e0e4ed;
+   border: 18px solid #9aabc5;
+   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.33);
+}
+
+
+.already-have-account {
+   margin-top: 10%;
+}
+
+.login-redirect {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 1px;
+}
+
+.link-for-login {
+   font-family: 'Times New Roman';
+   margin-top: -20px;
+   text-decoration: underline;
+}
