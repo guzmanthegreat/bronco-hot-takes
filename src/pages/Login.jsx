@@ -60,13 +60,13 @@ export default function Login() {
         <form id="login-form" onSubmit={handleSubmit}>
 
           <div className="input-container">
-            <label for="user-email">Email</label>
+            <label htmlFor="user-email">Email</label>
             <input type="email" id="user-email" name="user-email" placeholder="Enter email"></input>
             <p className="error-message" id="email-error"></p>
           </div>
 
           <div className="input-container">
-            <label for="password">Password</label>
+            <label htmlFor="user-password">Password</label>
             <input type="password" id="user-password" name="user-password" placeholder="Enter password"></input>
             <p className="error-message" id="password-error"></p>
           </div>
