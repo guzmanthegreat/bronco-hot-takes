@@ -1,4 +1,89 @@
-// Placeholder so the app runs. Replace with the real Login page.
+import React from 'react'
+import "../styles/Login.css"
+import { Link, useNavigate } from "react-router-dom"
+import { signIn } from "../services/authService.js";
+
 export default function Login() {
-  return <h1>Login page</h1>;
+
+  const navigate = useNavigate();
+
+  // javascript
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("user-email").value;
+    const password = document.getElementById("user-password").value;
+    const emailError = document.getElementById("email-error");
+    const passwordError = document.getElementById("password-error");
+
+    // clear past error messages
+    emailError.textContent = "";
+    passwordError.textContent = "";
+
+    // if email and password fields are empty
+    if (email.trim() === "") {
+      emailError.textContent = "Email is required.";
+    }
+    
+    if (password.trim() === "") {
+      passwordError.textContent = "Password is required.";
+    }
+
+    // if both fields are empty stop the function
+    if (email.trim() === "" || password.trim() === "") {
+      return;
+    }
+
+    // Connect to firebase
+    try {
+      const user = await signIn(email, password);
+      console.log("Successfully logged in: ", user.email);
+
+      // Redirect user after login
+      navigate("/");
+      
+    } catch (error) {
+
+      // Display firebase error
+      passwordError.textContent = error.message;
+    }
+
+  }
+
+  return(
+    <div className="login-page">
+
+      <h1 className="welcome-back-text">WELCOME BACK</h1>
+      <div className="login-container">
+        <h1 className="login-title">Login</h1>
+
+        <form id="login-form" onSubmit={handleSubmit}>
+
+          <div className="input-container">
+            <label htmlFor="user-email">Email</label>
+            <input type="email" id="user-email" name="user-email" placeholder="Enter email"></input>
+            <p className="error-message" id="email-error"></p>
+          </div>
+
+          <div className="input-container">
+            <label htmlFor="user-password">Password</label>
+            <input type="password" id="user-password" name="user-password" placeholder="Enter password"></input>
+            <p className="error-message" id="password-error"></p>
+          </div>
+
+          <div className="button-container">
+            <button type="submit" id="submit-button">Sign in</button>
+          </div>
+
+
+        </form>
+
+        <div className="sign-up-redirect">
+          <p className="dont-have-account">Don't have an account?</p>
+          <Link to="/signup" className="link-for-sign-up">Sign up</Link>
+        </div>
+
+      </div>
+    </div>
+  )
 }
