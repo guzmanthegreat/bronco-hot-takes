@@ -3,9 +3,12 @@ import React from 'react'
 import { useState } from 'react'
 import { Link } from "react-router-dom"
 import { signUp } from "../services/authService.js";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Signup() {
+
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,6 +35,12 @@ export default function Signup() {
        return;
      }
 
+    // if password is less than 6 characters
+     if (password.trim().length < 6 && password.trim() !== "") {
+      setPasswordError("Password must be at least 6 characters.");
+      return;
+     }
+
      // Connect to firebase
 
      try {
@@ -39,6 +48,7 @@ export default function Signup() {
       const user = await signUp(email.trim(), password);
       console.log("Account created: ", user.email);
       alert("Account successfully created!");
+      navigate("/");
 
      } catch (error) {
 
