@@ -60,8 +60,9 @@ export default function Signup() {
  
          </form>
 
-         <div className="">
-            <p className="login-link">Already have an account? <Link to="/login">Login</Link></p>
+         <div className="login-redirect">
+            <p className="already-have-account">Already have an account?</p>
+            <Link to="/login" className="link-for-login">Login</Link>
           </div>
 
         </div>
