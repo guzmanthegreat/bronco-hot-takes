@@ -29,7 +29,8 @@ export function AuthProvider({ children }) {
     }, []);
 
     return (
-        <AuthContext.Provider value = {{ user, loggedIn: !!user, loading, logout:logOut}}>
+        // only verified users count as logged in (signup briefly signs in unverified users)
+        <AuthContext.Provider value = {{ user, loggedIn: !!user && user.emailVerified, loading, logout:logOut}}>
             {!loading && children}
         </AuthContext.Provider>
     );

@@ -5,11 +5,16 @@ import { useAuth } from "../context/AuthContext.jsx";
 export default function Navbar() {
 
   // get login status from AuthContext
-  const { loggedIn, loading, logout } = useAuth();
+  const { loggedIn, logout } = useAuth();
   const navigate = useNavigate();
 
-  if (loading) {
-    return null;
+  async function handleLogout() {
+    try {
+      await logout();
+      navigate("/");
+    } catch (error) {
+      alert(error.message);
+    }
   }
 
   return (
@@ -21,13 +26,7 @@ export default function Navbar() {
           <>
             <li><NavLink to="/new">New Post</NavLink></li>
             {/* Pass logout function through button */}
-            <li><button className="logout-button" 
-              onClick={async () => {
-                await logout();
-                navigate("/");
-              }}
-            >
-              Logout</button></li> 
+            <li><button className="logout-button" onClick={handleLogout}>Logout</button></li>
           </>
         )}
 
