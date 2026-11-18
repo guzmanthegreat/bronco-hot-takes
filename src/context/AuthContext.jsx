@@ -23,5 +23,15 @@ export function AuthProvider({ children }) {
 
             return () => unsubscribe();
         })
-    });
+    }, []);
+
+    return (
+        <AuthContext.Provider value = {{ currentUser }}>
+            {! loading && children }
+        </AuthContext.Provider>
+    );
+}
+
+export function useAuth() {
+    return useContext(AuthContext);
 }
