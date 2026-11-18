@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/config.js";
+import { logOut } from "../services/authService.js";
 
 // create context to share login information with other components
 const AuthContext = createContext();
@@ -21,13 +22,15 @@ export function AuthProvider({ children }) {
             // when firebase finishes checking the user's login status
             setLoading(false);
 
-            return () => unsubscribe();
         })
+
+        return () => unsubscribe();
+        
     }, []);
 
     return (
-        <AuthContext.Provider value = {{ currentUser }}>
-            {! loading && children }
+        <AuthContext.Provider value = {{ user, loggedIn: !!user, loading, logout:logOut}}>
+            {!loading && children}
         </AuthContext.Provider>
     );
 }

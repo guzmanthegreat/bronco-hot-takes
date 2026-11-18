@@ -65,4 +65,5 @@ li a:hover {
 
 .logout-button:hover {
     text-decoration: underline;
+    cursor: pointer;
 }

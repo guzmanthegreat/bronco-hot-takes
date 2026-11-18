@@ -1,11 +1,12 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "../styles/Navbar.css"
 import { useAuth } from "../context/AuthContext.jsx";
 
 export default function Navbar() {
 
   // get login status from AuthContext
-  const { loggedIn, loading } = useAuth();
+  const { loggedIn, loading, logout } = useAuth();
+  const navigate = useNavigate();
 
   if (loading) {
     return null;
@@ -20,7 +21,13 @@ export default function Navbar() {
           <>
             <li><NavLink to="/new">New Post</NavLink></li>
             {/* Pass logout function through button */}
-            <li><button className="logout-button">Logout</button></li> 
+            <li><button className="logout-button" 
+              onClick={async () => {
+                await logout();
+                navigate("/");
+              }}
+            >
+              Logout</button></li> 
           </>
         )}
 
