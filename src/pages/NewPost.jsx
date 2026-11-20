@@ -58,7 +58,7 @@ export default function NewPost() {
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
 
-          <div className="char-count-container">
+          <div className={description.length > MAX_LENGTH ? "char-count-container over" : "char-count-container"}>
             <p>
               <span id="character-count">{description.length}</span>/{MAX_LENGTH} characters
             </p>

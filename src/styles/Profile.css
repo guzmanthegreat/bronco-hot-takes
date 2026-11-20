@@ -1,7 +1,13 @@
 .profile-page h1 {
-  margin-bottom: 0.5rem;
+  margin: 0 0 1rem;
+  font-size: 1.6rem;
+  color: var(--cpp-green);
 }
 
 .profile-page h2 {
   margin-top: 0;
+}
+
+.profile-page > p {
+  color: var(--text-muted);
 }

@@ -27,7 +27,7 @@ export default function Navbar() {
         {loggedIn && (
           <>
             <li>
-              <NavLink to="/new">New Post</NavLink>
+              <NavLink to="/new" className="nav-cta">New Post</NavLink>
             </li>
             {/* Pass logout function through button */}
             <li>

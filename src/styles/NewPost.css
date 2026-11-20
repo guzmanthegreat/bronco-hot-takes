@@ -1,86 +1,31 @@
-@font-face {
-  font-family: "Capriola";
-  src: url("../fonts/Capriola-Regular.ttf");
-  font-weight: normal;
-}
+/* Card, inputs, and button styles are shared in theme.css */
 
 .new-post {
-  border-radius: 10px;
-  padding: 3%;
-  margin-top: 4%;
-  margin-bottom: 4%;
-  margin-left: 20%;
-  margin-right: 20%;
-  background-color: #005030;
-  border: 18px solid #ffb81c;
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.33);
-  font-family: proxima-sera, sans-serif;
+  max-width: 560px;
+  margin-top: 1.5rem;
 }
 
 #create-post-header {
-  text-align: center;
-  margin-bottom: 4%;
-  font-size: 28px;
-  font-family: proxima-sera, sans-serif;
-  color: white;
-}
-
-.input-container {
-  display: flex;
-  flex-direction: column;
-  margin: 0 8% 2% 8%;
-  font-family: proxima-sera, sans-serif;
-}
-
-.new-post label {
-  font-size: 20px;
-  font-family: Capriola;
-  margin-bottom: 5px;
-  color: white;
+  letter-spacing: 0.06em;
 }
 
 .new-post textarea {
-  font-size: 15px;
-  font-family: Capriola;
-  height: 160px;
-  padding: 5px;
-  width: auto;
+  height: 140px;
+  resize: vertical;
 }
 
-.new-post input {
-  font-size: 15px;
-  padding: 5px;
-  font-family: proxima-sera, sans-serif;
-}
-
-.button-container {
+.char-count-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  font-size: 12.5px;
+  color: var(--cpp-tan);
+  font-variant-numeric: tabular-nums;
 }
 
-.new-post button {
-  font-size: 18px;
-  font-family: proxima-sera, sans-serif;
-  padding: 6px;
-  margin-top: 10px;
-  border-radius: 5px;
+.char-count-container p {
+  margin: 0;
 }
 
-.new-post button:hover {
-  cursor: pointer;
-}
-
-.new-post label {
-  font-family: proxima-sera, sans-serif;
-}
-.post-description {
-  font-family: proxima-sera, sans-serif;
-}
-
-.new-post textarea {
-  font-family: proxima-sera, sans-serif;
-}
-
-.new-post p {
-  color: #cfbab0;
+.char-count-container.over {
+  color: var(--error-on-green);
 }
