@@ -1,64 +1,67 @@
 @font-face {
-   font-family: 'Capriola';
-   src: url('../fonts/Capriola-Regular.ttf');
-   font-weight: normal;
+  font-family: "Capriola";
+  src: url("../fonts/Capriola-Regular.ttf");
+  font-weight: normal;
 }
-
 
 .login-title {
-   text-align: center;
-   font-family: Capriola;
-   font-size: 28px;
-   margin-bottom: 10%;
+  text-align: center;
+  font-family: proxima-sera, sans-serif;
+  font-size: 28px;
+  margin-bottom: 10%;
+  color: white;
 }
-
 
 .sign-up-link {
-   margin-top: 5%;
-   text-align: center;
+  margin-top: 5%;
+  text-align: center;
 }
-
 
 .error-message {
-   color: red;
+  color: red;
 }
-
 
 .signup-title {
-   text-align: center;
-   font-family: Capriola;
-   margin-top: 4%;
-   margin-bottom: 10%;
-   font-size: 28px;
+  text-align: center;
+  font-family: proxima-sera, sans-serif;
+  margin-top: 4%;
+  margin-bottom: 10%;
+  font-size: 28px;
+  color: white;
 }
-
 
 .signup-page {
-   border-radius: 10px;
-   padding: 3%;
-   margin-top: 4%;
-   margin-bottom: 4%;
-   margin-left: 20%;
-   margin-right: 20%;
-   background-color: #e0e4ed;
-   border: 18px solid #9aabc5;
-   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.33);
+  border-radius: 10px;
+  padding: 3%;
+  margin-top: 4%;
+  margin-bottom: 4%;
+  margin-left: 20%;
+  margin-right: 20%;
+  background-color: #005030;
+  border: 18px solid #ffb81c;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.33);
 }
 
-
 .already-have-account {
-   margin-top: 10%;
+  margin-top: 10%;
+  color: #cfbab0;
 }
 
 .login-redirect {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   gap: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  color: #cfbab0;
 }
 
 .link-for-login {
-   font-family: 'Times New Roman';
-   margin-top: -20px;
-   text-decoration: underline;
+  font-family: "Times New Roman";
+  margin-top: -20px;
+  text-decoration: underline;
+  color: #cfbab0;
+}
+
+.input-container {
+  color: white;
 }

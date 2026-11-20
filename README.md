@@ -30,7 +30,7 @@ cp .env.example .env   # only needed once Firebase is wired up
 npm run dev            # opens at http://localhost:5173
 ```
 
-Every page is a placeholder for now, so you can click through the routes before the real pages are built:
+Current routes:
 
 | Route | Page |
 |---|---|
@@ -38,7 +38,7 @@ Every page is a placeholder for now, so you can click through the routes before 
 | `/login`, `/signup` | Login, Signup |
 | `/new` | Create post |
 | `/post/:id` | Post detail |
-| `/profile/:userId` | Profile |
+| `/profile/:userId` | User's posts |
 | anything else | 404 |
 
 # Team Development Workflow
@@ -98,5 +98,4 @@ Which files each task touches. All routes are already set up in `src/App.jsx`, s
 | Post detail page | `src/pages/PostDetail.jsx` |
 | Reply components | `src/components/ReplyForm.jsx`, `src/components/ReplyList.jsx`, `src/utils/sampleData.js` |
 | Navbar user menu | `src/components/Navbar.jsx`, `src/context/AuthContext.jsx` |
-| Profile page | `src/pages/Profile.jsx` |
 | 404 and error boundary | `src/pages/NotFound.jsx`, `src/components/ErrorBoundary.jsx` |

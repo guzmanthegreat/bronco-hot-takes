@@ -7,9 +7,14 @@ import {
 } from "firebase/auth";
 
 import { auth } from "../firebase/config.js";
+import { db } from "../firebase/config.js";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 // Only Cal Poly Pomona emails can create an account
 const ALLOWED_DOMAIN = "@cpp.edu";
+const USERNAME_PATTERN = /^[a-zA-Z0-9_]{3,20}$/;
+
+export const isValidUsername = (username) => USERNAME_PATTERN.test(username.trim());
 
 export const isCppEmail = (email) =>
   email.trim().toLowerCase().endsWith(ALLOWED_DOMAIN);
@@ -43,6 +48,9 @@ export const getErrorMsg = (code) => {
     case "auth/email-not-verified":
       return "Please verify your email first. Check your inbox for the link.";
 
+    case "auth/invalid-username":
+      return "Username must be 3–20 characters using letters, numbers, or underscores.";
+
     default:
       return "Something went wrong. Please try again!";
   }
@@ -55,7 +63,7 @@ const toAuthError = (error) => {
 };
 
 //Sign up Function
-export async function signUp(email, password) {
+export async function signUp(email, password, username) {
   /*creating the account with the function createUserWithEmailAndPassword(param1)
     Only @cpp.edu emails are allowed. After the account is created a verification
     email is sent and the user is signed out until they verify.
@@ -69,9 +77,22 @@ export async function signUp(email, password) {
     throw authError("auth/not-cpp-email");
   }
 
+  if (!isValidUsername(username)) {
+    throw authError("auth/invalid-username");
+  }
+
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
+    await setDoc(doc(db, "users", user.uid), {
+      username: username.trim(),
+      email: user.email,
+      createdAt: serverTimestamp(),
+    });
+    await setDoc(doc(db, "publicProfiles", user.uid), {
+      username: username.trim(),
+      createdAt: serverTimestamp(),
+    });
     await sendEmailVerification(user);
     console.log("Verification email sent to: ", user.email);
 

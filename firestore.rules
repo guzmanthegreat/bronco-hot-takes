@@ -17,6 +17,11 @@ service cloud.firestore {
         && request.auth.token.email.matches('.*@cpp[.]edu$');
     }
 
+    function isCppUser() {
+      return request.auth != null
+        && request.auth.token.email.matches('.*@cpp[.]edu$');
+    }
+
     // signed-in Bronco whose uid matches
     function isMe(uid) {
       return isBronco() && request.auth.uid == uid;
@@ -29,6 +34,27 @@ service cloud.firestore {
     // fields changed by an update
     function changedKeys() {
       return request.resource.data.diff(resource.data).affectedKeys();
+    }
+
+    match /users/{userId} {
+      allow read: if isMe(userId);
+      allow create: if isCppUser() && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['username', 'email', 'createdAt'])
+        && validString(request.resource.data.username, 20)
+        && request.resource.data.email == request.auth.token.email;
+      allow update: if isMe(userId)
+        && changedKeys().hasOnly(['username'])
+        && validString(request.resource.data.username, 20);
+    }
+
+    match /publicProfiles/{userId} {
+      allow read: if isBronco();
+      allow create: if isCppUser() && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['username', 'createdAt'])
+        && validString(request.resource.data.username, 20);
+      allow update: if isMe(userId)
+        && changedKeys().hasOnly(['username'])
+        && validString(request.resource.data.username, 20);
     }
 
 
@@ -71,15 +97,38 @@ service cloud.firestore {
 
         allow create: if isBronco()
           && request.resource.data.keys().hasOnly(
-               ['postId', 'text', 'authorId', 'authorUsername', 'createdAt'])
+               ['postId', 'text', 'authorId', 'authorUsername', 'createdAt', 'score'])
           && request.resource.data.postId == postId
           && request.resource.data.authorId == request.auth.uid
           && validString(request.resource.data.text, 250)
           && request.resource.data.authorUsername is string
-          && request.resource.data.createdAt == request.time;
+          && request.resource.data.createdAt == request.time
+          && request.resource.data.score == 0;
 
-        allow update: if false;
+        allow update: if isBronco()
+          && changedKeys().hasOnly(['score'])
+          && request.resource.data.keys().hasAll(['score'])
+          && (
+            (!resource.data.keys().hasAll(['score'])
+              && request.resource.data.score in [-1, 1])
+            ||
+            (resource.data.keys().hasAll(['score'])
+              && request.resource.data.score - resource.data.score >= -2
+              && request.resource.data.score - resource.data.score <= 2)
+          );
         allow delete: if isMe(resource.data.authorId);
+
+        match /votes/{userId} {
+          allow read: if isBronco();
+
+          allow create, update: if isMe(userId)
+            && request.resource.data.keys().hasOnly(['userId', 'value', 'createdAt'])
+            && request.resource.data.userId == userId
+            && request.resource.data.value in [1, -1]
+            && request.resource.data.createdAt == request.time;
+
+          allow delete: if isMe(userId);
+        }
       }
 
 
