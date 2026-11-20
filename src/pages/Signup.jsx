@@ -2,7 +2,7 @@ import "../styles/Signup.css"
 import React from 'react'
 import { useState } from 'react'
 import { Link } from "react-router-dom"
-import { signUp, isCppEmail } from "../services/authService.js";
+import { signUp, isCppEmail, isValidUsername } from "../services/authService.js";
 import { useNavigate } from "react-router-dom";
 
 
@@ -11,6 +11,7 @@ export default function Signup() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -30,10 +31,19 @@ export default function Signup() {
      if (password.trim() === "") {
        setPasswordError("Password is required.");
      }
+
+     if (username.trim() === "") {
+       setEmailError("Username is required.");
+     }
       // if both fields are empty stop the function
-     if (email.trim() === "" || password.trim() === "") {
+     if (email.trim() === "" || password.trim() === "" || username.trim() === "") {
        return;
      }
+
+    if (!isValidUsername(username)) {
+      setEmailError("Username must be 3–20 characters using letters, numbers, or underscores.");
+      return;
+    }
 
     // only Cal Poly Pomona emails are allowed
      if (!isCppEmail(email)) {
@@ -51,7 +61,7 @@ export default function Signup() {
 
      try {
 
-      const user = await signUp(email.trim(), password);
+      const user = await signUp(email.trim(), password, username.trim());
       console.log("Account created: ", user.email);
       alert(`Account created! We sent a verification link to ${user.email}. Verify your email, then log in.`);
       navigate("/login");
@@ -59,7 +69,7 @@ export default function Signup() {
      } catch (error) {
 
       // Display firebase authentication
-      if (error.code === "auth/email-already-in-use" || error.code === "auth/invalid-email" || error.code === "auth/not-cpp-email") {
+      if (error.code === "auth/email-already-in-use" || error.code === "auth/invalid-email" || error.code === "auth/not-cpp-email" || error.code === "auth/invalid-username") {
         setEmailError(error.message);
       }
       else {
@@ -73,6 +83,14 @@ export default function Signup() {
           <form id="signup-form" onSubmit={handleSubmit}>
 
            <h1 className="signup-title">Sign up</h1>
+
+            <div className="input-container">
+
+             <label htmlFor="username">Anonymous username</label>
+             <input type="text" id="username" name="username" placeholder="Choose a username" value={username} onChange={(e) => setUsername(e.target.value)}></input>
+             <p className="username-help">3–20 letters, numbers, or underscores</p>
+
+           </div>
 
             <div className="input-container">
 

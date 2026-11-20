@@ -7,8 +7,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NewPost from "./pages/NewPost";
 import PostDetail from "./pages/PostDetail";
-import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
 import "./firebase/config";
 
 export default function App() {
@@ -16,13 +16,42 @@ export default function App() {
     <ErrorBoundary>
       <Layout>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/new" element={<ProtectedRoute><NewPost /></ProtectedRoute>} />
+          <Route
+            path="/new"
+            element={
+              <ProtectedRoute>
+                <NewPost />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/post/:id" element={<PostDetail />} />
-          <Route path="/profile/:userId" element={<Profile />} />
+          <Route
+            path="/profile/:userId"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<NotFound />} />
+          <Route
+            path="/profile/:userId"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </Layout>
     </ErrorBoundary>

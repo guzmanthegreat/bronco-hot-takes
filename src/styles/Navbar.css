@@ -1,69 +1,84 @@
 @font-face {
-    font-family: 'Capriola';
-    src: url('../fonts/Capriola-Regular.ttf');
-    font-weight: normal;
+  font-family: "Capriola";
+  src: url("../fonts/Capriola-Regular.ttf");
+  font-weight: normal;
 }
 
 /* mobile view */
 @media (max-width: 600px) {
-    .navbar {
-        flex-direction: column;
-    }
+  .navbar {
+    flex-direction: column;
+  }
 }
 
 .active {
-    text-decoration: underline;
-    font-weight: bold;
+  text-decoration: underline;
+  font-weight: bold;
 }
 
 .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #9AABC5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #9aabc5;
+  background-color: #005030;
 }
 
 .website-title {
-    font-size: 25px;
-    color: black;
-    font-family: Capriola;
-    text-decoration: none;
+  font-size: 25px;
+  /*color: black;*/
+  font-family: "proxima-sera", sans-serif;
+  text-decoration: none;
+  color: #ffb81c;
 }
 
 ul {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 ul li {
-    list-style: none;
+  list-style: none;
 }
 
 a {
-    padding: 1rem;
-    text-decoration: none;
-    color: black;
-    font-family: Capriola;
-    font-size: 16px;
+  padding: 1rem;
+  text-decoration: none;
+  color: white;
+  font-family: "proxima-sera", sans-serif;
+  font-size: 16px;
 }
 
 li a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .logout-button {
-    text-decoration: none;
-    color: black;
-    font-family: Capriola;
-    font-size: 16px;
-    background: none;
-    border: none;
-    margin-top: 0;
-    border-radius: 0;
-    margin-right: 0.8rem;
+  text-decoration: none;
+  /*color: black;*/
+  color: white;
+  font-family: "proxima-sera", sans-serif;
+  font-size: 16px;
+  background: none;
+  border: none;
+  margin-top: 0;
+  border-radius: 0;
+  margin-right: 0.8rem;
 }
 
 .logout-button:hover {
-    text-decoration: underline;
-    cursor: pointer;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.website-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.flame-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
