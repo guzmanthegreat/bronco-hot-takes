@@ -1,11 +1,101 @@
 rules_version = '2';
 
-// Security rules for posts, votes, and replies.
-// TODO: replace this deny-all default with real rules.
+// Security rules for posts, replies, and votes.
+// See docs/data-model.md for the fields each document has.
+// Editing this file does NOT change the live rules.
+
+
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if false;
+
+    // ---------- helpers ----------
+
+    // signed in with a verified @cpp.edu email
+    function isBronco() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email.matches('.*@cpp[.]edu$');
+    }
+
+    // signed-in Bronco whose uid matches
+    function isMe(uid) {
+      return isBronco() && request.auth.uid == uid;
+    }
+
+    function validString(s, max) {
+      return s is string && s.size() > 0 && s.size() <= max;
+    }
+
+    // fields changed by an update
+    function changedKeys() {
+      return request.resource.data.diff(resource.data).affectedKeys();
+    }
+
+
+    // ---------- posts/{postId} ----------
+    match /posts/{postId} {
+      allow read: if isBronco();
+
+      allow create: if isBronco()
+        && request.resource.data.keys().hasOnly(
+             ['title', 'text', 'tags', 'authorId', 'authorUsername', 'createdAt', 'score', 'replyCount'])
+        && request.resource.data.authorId == request.auth.uid
+        && validString(request.resource.data.title, 100)
+        && validString(request.resource.data.text, 250)
+        // tags are optional; if present, a list of up to 5
+        && (!('tags' in request.resource.data)
+            || (request.resource.data.tags is list && request.resource.data.tags.size() <= 5))
+        && request.resource.data.authorUsername is string
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.score == 0
+        && request.resource.data.replyCount == 0;
+
+      // Posts can't be edited. Other users can only nudge the counters
+      // when they vote (score, +/-2 covers switching a vote) or reply (replyCount, +/-1).
+      allow update: if isBronco() && (
+          (changedKeys().hasOnly(['score'])
+            && request.resource.data.score - resource.data.score >= -2
+            && request.resource.data.score - resource.data.score <= 2)
+        ||
+          (changedKeys().hasOnly(['replyCount'])
+            && (request.resource.data.replyCount == resource.data.replyCount + 1
+             || request.resource.data.replyCount == resource.data.replyCount - 1))
+      );
+
+      allow delete: if isMe(resource.data.authorId);
+
+
+      // ---------- posts/{postId}/replies/{replyId} ----------
+      match /replies/{replyId} {
+        allow read: if isBronco();
+
+        allow create: if isBronco()
+          && request.resource.data.keys().hasOnly(
+               ['postId', 'text', 'authorId', 'authorUsername', 'createdAt'])
+          && request.resource.data.postId == postId
+          && request.resource.data.authorId == request.auth.uid
+          && validString(request.resource.data.text, 250)
+          && request.resource.data.authorUsername is string
+          && request.resource.data.createdAt == request.time;
+
+        allow update: if false;
+        allow delete: if isMe(resource.data.authorId);
+      }
+
+
+      // ---------- posts/{postId}/votes/{userId} ----------
+      // The document ID is the voter's uid, so each user gets one vote per post.
+      match /votes/{userId} {
+        allow read: if isBronco();
+
+        allow create, update: if isMe(userId)
+          && request.resource.data.keys().hasOnly(['userId', 'value', 'createdAt'])
+          && request.resource.data.userId == userId
+          && request.resource.data.value in [1, -1]
+          && request.resource.data.createdAt == request.time;
+
+        allow delete: if isMe(userId);
+      }
     }
   }
 }

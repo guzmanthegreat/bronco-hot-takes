@@ -16,7 +16,9 @@ Define how posts, replies, and votes are stored in Firestore.
 
 | Field | Type | Required | Description |
 |---|---|---:|---|
-| `text` | string | Yes | Content of the post |
+| `title` | string | Yes | Post title (1–100 characters) |
+| `text` | string | Yes | Content of the post (1–250 characters) |
+| `tags` | array of strings | No | Up to 5 tags; can be left out or `[]` |
 | `authorId` | string | Yes | Firebase user ID |
 | `authorUsername` | string | Yes | Display username |
 | `createdAt` | timestamp | Yes | Creation time |
@@ -27,7 +29,9 @@ Define how posts, replies, and votes are stored in Firestore.
 
 ```json
 {
+  "title": "Free food at ASI",
   "text": "Yoooo!!! ASI ASI is giving away free food.",
+  "tags": ["food", "asi"],
   "authorId": "user_123",
   "authorUsername": "noname",
   "createdAt": "Firestore Timestamp",
@@ -41,7 +45,7 @@ Define how posts, replies, and votes are stored in Firestore.
 |---|---|---:|---|
 | `postId` | string | Yes | ID of the post being replied to |
 | `text` | string | Yes | Content of the reply |
-| `authorID` | string | Yes | Firebase Auth user ID of the author |
+| `authorId` | string | Yes | Firebase Auth user ID of the author |
 | `authorUsername` | string | Yes | Display username shown with the reply |
 | `createdAt` | timestamp | Yes | Time when the reply was created |
 
