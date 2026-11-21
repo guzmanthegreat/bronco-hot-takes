@@ -1,0 +1,29 @@
+# Render Blueprint for Bronco Hot Takes (static site).
+# Only used if the site is created from Render's "New > Blueprint".
+# For a Static Site created by hand, enter the same settings in the dashboard.
+services:
+  - type: web
+    runtime: static
+    name: bronco-hot-takes
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    # React Router: send every path to index.html so refreshing /login etc. works
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    # Firebase config. Render asks for these values when the Blueprint is created
+    # (copy them from your .env). They are not stored in the repo.
+    envVars:
+      - key: VITE_FIREBASE_API_KEY
+        sync: false
+      - key: VITE_FIREBASE_AUTH_DOMAIN
+        sync: false
+      - key: VITE_FIREBASE_PROJECT_ID
+        sync: false
+      - key: VITE_FIREBASE_STORAGE_BUCKET
+        sync: false
+      - key: VITE_FIREBASE_MESSAGING_SENDER_ID
+        sync: false
+      - key: VITE_FIREBASE_APP_ID
+        sync: false
