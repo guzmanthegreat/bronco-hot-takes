@@ -1,5 +1,8 @@
 .navbar {
-  position: relative;
+  /* stays at the top of the screen while the page scrolls */
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -142,18 +145,100 @@
   }
 }
 
-/* mobile view */
+/* hamburger button: hidden on desktop */
+.menu-toggle {
+  display: none;
+}
+
+/* mobile view: one row with a hamburger menu */
 @media (max-width: 600px) {
   .navbar {
-    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 0.6rem 1rem 0.7rem;
   }
 
   .website-title {
-    font-size: 25px;
+    font-size: 23px;
+    gap: 10px;
+    min-width: 0;
   }
 
   .flame-icon {
     width: 32px;
     height: 32px;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 42px;
+    height: 42px;
+    padding: 0 10px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: none;
+    cursor: pointer;
+  }
+
+  .menu-toggle:hover,
+  .menu-toggle.open {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .menu-toggle-bar {
+    display: block;
+    height: 2px;
+    border-radius: 2px;
+    background: #fff;
+  }
+
+  /* bars turn into an X when open */
+  .menu-toggle.open .menu-toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .menu-toggle.open .menu-toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.open .menu-toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* links become a dropdown panel under the bar */
+  .navbar ul.nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.9rem 1rem 1rem;
+    background: var(--cpp-green);
+    border-bottom: 3px solid var(--cpp-gold);
+    box-shadow: 0 12px 24px -10px rgba(0, 40, 20, 0.6);
+  }
+
+  .navbar ul.nav-links.open {
+    display: flex;
+  }
+
+  .navbar ul.nav-links a,
+  .navbar ul.nav-links .logout-button {
+    width: 100%;
+    justify-content: center;
+    padding: 0.7rem 1rem;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 600px) and (prefers-reduced-motion: no-preference) {
+  .menu-toggle-bar {
+    transition: transform 0.2s, opacity 0.2s;
   }
 }
